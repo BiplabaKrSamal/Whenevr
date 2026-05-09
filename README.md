@@ -1,60 +1,51 @@
-# Whenevr® — Design Subscription Landing Page
+# Whenevr® — Pixel-Perfect Clone
 
-A pixel-perfect Next.js 16 clone of the [Whenevr Framer design](https://whenevr.framer.website/).
+Next.js 15 + TypeScript + Tailwind CSS clone of [whenevr.framer.website](https://whenevr.framer.website).
+
+## Deploy in 60 seconds
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Deploy to Vercel (takes ~90s)
+npx vercel --prod
+```
+
+Or push to GitHub → import at vercel.com/new → auto-deploys.
+
+## What's built
+
+| Section | Details |
+|---|---|
+| **Nav** | Sticky with blur, active section highlight, full-screen overlay menu with staggered animation |
+| **Hero** | Marquee pill strip, animated gradient blob, booking CTA pill with pulse-dot |
+| **Logos** | Slow marquee with pause-on-hover |
+| **How It Works** | 4-step grid with scroll-reveal |
+| **Showcase** | Image grid with hover zoom + overlay |
+| **Features** | 6-card grid with icon swap on hover |
+| **Pricing** | Monthly/annual toggle, 3-tier cards, savings calc |
+| **Testimonials** | 4-card grid with star ratings |
+| **FAQ** | CSS grid accordion, no JS libraries |
+| **Blog** | Featured post + 3-card grid, static generated |
+| **CTA** | Dark panel with gradient blobs |
+| **Footer** | 4-column responsive |
+| **Booking Dialog** | Full multi-step: calendar → time slots → details → confirmation |
+| **Blog pages** | `/blog` index + `/blog/[slug]` statically generated |
 
 ## Stack
 
-- **Framework**: Next.js 16 (App Router, Turbopack)
-- **Styling**: Tailwind CSS v4 (`@theme` API, no config-file tokens)
-- **Animations**: CSS keyframes + IntersectionObserver scroll reveals
-- **Forms**: React Hook Form + Zod validation
-- **Images**: Next.js `<Image>` with AVIF/WebP optimisation
-- **Fonts**: Instrument Serif (Google Fonts) + System UI sans
+- **Next.js 15** (App Router, static export capable)
+- **TypeScript** (strict)
+- **Tailwind CSS** (custom design tokens, CSS vars)
+- **react-hook-form + zod** (booking form validation)
+- **date-fns** (calendar logic)
+- **lucide-react** (icons)
 
-## Features
+## Design decisions
 
-- Fully responsive (mobile → tablet → desktop)
-- Smooth scroll-reveal animations on every section
-- Interactive booking dialog with calendar + time-slot picker (multi-step)
-- Animated marquees (pill tags, logo strip) with `pause-on-hover`
-- Animated blob hero with CSS radial gradients
-- Accordion FAQ with CSS `grid-rows` animation
-- Annual/monthly pricing toggle
-- Blog index + individual post pages (statically generated)
-- Full-screen navigation overlay with staggered link reveals
-- Hover states, press transforms, and micro-interactions throughout
-
-## Getting started
-
-```bash
-npm install
-npm run dev       # http://localhost:3000
-npm run build     # production build
-```
-
-## Project structure
-
-```
-app/
-  page.tsx              # Home
-  blog/
-    page.tsx            # Blog index
-    [slug]/page.tsx     # Blog post (SSG)
-  globals.css           # Tailwind v4 @theme tokens + animations
-  layout.tsx
-components/
-  booking/
-    BookingDialog.tsx   # Multi-step booking flow
-  landing/
-    Nav.tsx Hero.tsx Logos.tsx HowItWorks.tsx Showcase.tsx
-    Features.tsx Pricing.tsx Testimonials.tsx FAQ.tsx Blog.tsx
-    CTA.tsx Footer.tsx
-  ui/
-    button.tsx input.tsx textarea.tsx label.tsx dialog.tsx
-data/
-  posts.ts              # Blog post content
-hooks/
-  use-scroll-reveal.tsx
-  use-active-section.tsx
-public/assets/          # Images (avatars, work, blog)
-```
+- CSS custom properties for all colors → dark mode ready
+- `reveal-up` scroll animations via IntersectionObserver hook
+- `btn-press` / `card-hover` utility classes for consistent micro-interactions
+- Instrument Serif italic for display headings (matching Framer original)
+- `[mask-image]` gradient fades on marquees

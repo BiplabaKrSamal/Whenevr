@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-border: hsl(40 6% 89%);
+  --color-input: hsl(40 6% 89%);
+  --color-ring: hsl(0 0% 6%);
+  --color-background: hsl(40 8% 97%);
+  --color-foreground: hsl(0 0% 6%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 6%);
+  --color-primary: hsl(0 0% 6%);
+  --color-primary-foreground: hsl(40 8% 98%);
+  --color-secondary: hsl(40 6% 93%);
+  --color-secondary-foreground: hsl(0 0% 10%);
+  --color-muted: hsl(40 6% 93%);
+  --color-muted-foreground: hsl(0 0% 45%);
+  --color-accent: hsl(264 90% 70%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-available: hsl(142 70% 45%);
+  --color-pill: hsl(0 0% 100%);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius: 1rem;
+
+  --shadow-pill: 0 1px 1px hsl(0 0% 0% / 0.04), 0 4px 14px hsl(0 0% 0% / 0.06);
+  --shadow-card: 0 0 0 1px hsl(0 0% 0% / 0.04), 0 1px 2px hsl(0 0% 0% / 0.04), 0 8px 24px hsl(0 0% 0% / 0.05);
+  --shadow-hover: 0 0 0 1px hsl(0 0% 0% / 0.05), 0 2px 4px hsl(0 0% 0% / 0.06), 0 18px 40px hsl(0 0% 0% / 0.10);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Instrument Serif", "Georgia", serif;
+  --font-mono: ui-monospace, "Courier New", monospace;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+  --animate-blob: float-blob 12s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0,0,0); }
+  to { transform: translate3d(-50%,0,0); }
+}
+@keyframes float-blob {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-12px,16px,0) scale(1.03); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2 { letter-spacing: -0.035em; }
+  h3, h4 { letter-spacing: -0.02em; }
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: -0.015em;
+}
+
+.hero-blob {
+  background:
+    radial-gradient(45% 38% at 30% 35%, hsl(264 95% 80% / 0.95) 0%, transparent 65%),
+    radial-gradient(40% 50% at 65% 55%, hsl(220 95% 78% / 0.90) 0%, transparent 70%),
+    radial-gradient(38% 32% at 55% 80%, hsl(330 90% 82% / 0.85) 0%, transparent 70%),
+    radial-gradient(30% 24% at 80% 30%, hsl(280 90% 85% / 0.65) 0%, transparent 70%);
+  filter: blur(28px) saturate(1.05);
+  border-radius: 50%;
+}
+
+.pause-on-hover:hover { animation-play-state: paused; }
+
+.btn-press {
+  transition: transform 280ms cubic-bezier(0.16,1,0.3,1), box-shadow 280ms cubic-bezier(0.16,1,0.3,1), background-color 180ms ease;
+}
+.btn-press:hover { transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn-press:active { transform: translateY(0) scale(0.985); transition-duration: 80ms; }
+
+.card-hover {
+  box-shadow: var(--shadow-card);
+  transition: transform 280ms cubic-bezier(0.16,1,0.3,1), box-shadow 280ms cubic-bezier(0.16,1,0.3,1), background-color 280ms ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  background-color: var(--color-card);
+  box-shadow: 0 0 0 1px hsl(0 0% 0% / 0.08), 0 2px 4px hsl(0 0% 0% / 0.06), 0 22px 50px hsl(0 0% 0% / 0.10);
+}
+
+.shadow-pill { box-shadow: var(--shadow-pill); }
+.shadow-card { box-shadow: var(--shadow-card); }
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.55s cubic-bezier(0.16,1,0.3,1) var(--reveal-delay, 0ms),
+    transform 0.55s cubic-bezier(0.16,1,0.3,1) var(--reveal-delay, 0ms);
+}
+.reveal-up[data-revealed="true"] { opacity: 1; transform: translateY(0); }
+
+:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+:focus:not(:focus-visible) { outline: none; }
